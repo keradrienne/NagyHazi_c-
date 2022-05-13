@@ -47,10 +47,4 @@ public:
 	virtual ~Allat() {}
 };
 
-/// Globális inserter
-/// @param os - output stream referencia
-/// @param k - Tulaj referencia
-/// @return output stream referencia
-std::ostream& operator<<(std::ostream& os, Kutya& k);
-
 #endif // ALLAT_H

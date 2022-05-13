@@ -18,29 +18,24 @@
 
 using std::ios_base;
 
-
-/// Konstruktorok: egy char karakterből
 String::String(const char p) {
 	len = 1;
 	pData = new char[2];
 	pData[0] = p;
 	pData[1] = '\0';
 }
-///                egy nullával lezárt char sorozatból
+
 String::String(const char* p) {
 	len = strlen(p);
 	pData = new char[len + 1];
 	strcpy(pData, p);
 }
 
-/// Másoló konstruktor: String-ből készít
 String::String(const String& s) {
 	pData = new char[(len = s.len) + 1];
 	strcpy(pData, s.pData);
 }
-/// Destruktor (disposeString)
 
-/// operator=
 String& String::operator=(const String& s) {
 	if (this != &s) {
 		delete[] pData;
@@ -50,14 +45,11 @@ String& String::operator=(const String& s) {
 	return *this;
 }
 
-/// operator+=
 String& String::operator+=(const String& rhs_s) {
 	*this = *this + rhs_s;
 	return *this;
 }
 
-/// [] operátorok: egy megadott indexű elem REFERENCIÁJÁVAL térnek vissza
-/// indexhiba esetén const char* kivételt dob!
 char& String::operator[](size_t idx) {
 	if (idx >= len || idx < 0) throw "const char*";
 	return pData[idx];
@@ -68,8 +60,6 @@ const char& String::operator[](size_t idx) const {
 	return pData[idx];
 }
 
-/// + operátorok:
-///                 String-hez jobbról karaktert ad
 String String::operator+(const char p) const {
 	char *uj = new char[len + 2];
 	strcpy(uj, pData);
@@ -80,7 +70,7 @@ String String::operator+(const char p) const {
 	delete[] uj;
 	return ujs;
 }
-///                 String-hez String-et ad
+
 String String::operator+(const String& s) const {
 	char* uj = new char[len + s.len + 1];
 	strcpy(uj, pData);
@@ -91,7 +81,7 @@ String String::operator+(const String& s) const {
 	return ujs;
 }
 
-/// == operátorok
+
 bool String::operator==(const String& s) const {
 	if (len != s.len) return false;
 	else {
@@ -114,7 +104,6 @@ bool String::operator==(const char* s) const {
 	return true;
 }
 
-/// != operátorok
 bool String::operator!=(const String& s) const {
 	if (len != s.len) return true;
 	else {
@@ -137,13 +126,10 @@ bool String::operator!=(const char* s) const {
 	return false;
 }
 
-/// String operator+
 String operator+(char c, String& s) { return String(c) + s; }
 
-/// << operator, ami kiír az ostream-re
 std::ostream& operator<<(std::ostream& os, const String& s) { return os << s.c_str(); }
 
-// << operátor, ami beolvas az istreamről egy szót
 std::istream& operator>>(std::istream& is, String& s0) {
 	unsigned char ch;
 	s0 = String("");

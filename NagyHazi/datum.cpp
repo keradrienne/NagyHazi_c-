@@ -16,8 +16,6 @@
 using std::setw;
 using std::setfill;
 
-/// Paraméter nélkül hívható konstruktor.
-/// Mai napot állítja be
 Datum::Datum() {
     time_t tim;
     tim = time(NULL);       // lekérdezzük a jelenlegi időt
@@ -28,7 +26,6 @@ Datum::Datum() {
 
 }
 
-/// Paraméteres konstruktor
 Datum::Datum(int ev, int ho, int nap) {
     time_t tim;
     tim = time(NULL);       // lekérdezzük a jelenlegi időt
@@ -42,10 +39,6 @@ Datum::Datum(int ev, int ho, int nap) {
     }
 }
 
-/// Globális inserter eeee-hh-nn formában
-/// @param os - output stream referencia
-/// @param s - Datum referencia
-/// @return output stream referencia
 std::ostream& operator<<(std::ostream& os, const Datum& d) {
     return os << setw(4) << d.getEv() << "-"
        << setw(2) << setfill('0') << d.getHo() << "-"

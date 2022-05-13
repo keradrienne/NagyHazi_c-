@@ -19,7 +19,7 @@ class Lista {
     struct ListaElem {
         T  adat;		    // adat
         ListaElem* kov;	    // pointer a következõre
-        ListaElem(ListaElem* p = NULL) :kov(p) {}
+        ListaElem(ListaElem* p = NULL) :kov(p) {}   // Konstruktor
         
         ListaElem& operator=(const ListaElem);
     };
@@ -32,38 +32,58 @@ class Lista {
 public:
     Lista() { akt = elso = new ListaElem; }	// strázsa létrehozása
 
+    /// Globális inserter
+    /// @param os - output stream referencia
+    /// @param rhs - Lista referencia
+    /// @return output stream referencia
     friend std::ostream& operator<<(std::ostream& os, const Lista& rhs) {
         ListaElem* i = rhs.elso;
         while (i->kov != NULL)
         {
-            std::cout << i->adat;
-            std::cout << std::endl;
-            i = i->kov;
+            std::cout << std::endl << "\t--------------------------------------------------------------------------------";
+            std::cout << i->adat;   // adat kiírása
+            std::cout << std::endl << "\t--------------------------------------------------------------------------------" << std::endl;
+            i = i->kov;             // pointer növelése
         }
         return os;
     }
 
+    /// Globális fájlinserter
+    /// @param of - output stream referencia
+    /// @param rhs - Lista referencia
+    /// @return output stream referencia
     friend std::ofstream& operator<<(std::ofstream& of, const Lista& rhs) {
-        ListaElem* i = rhs.elso;
+        ListaElem* i = rhs.elso;    // futó pointer
         while (i->kov != NULL)
         {
-            of << i->adat;
-            i = i->kov;
+            of << i->adat;      // adat kiírás fájlba
+            i = i->kov;         // iterátor növelése
         }
         return of;
     }
 
-    void beszur(const T& dat);      	        // elem beszúrása
-    void torol(const T& dat);                   // elem törlése
-    void modosit(const T& dat, const T& mod);   // elem módosítása
+    /// Elem beszúrása listába
+    /// @param dat - beszúrandó adat refernciája
+    void beszur(const T& dat);
+
+    /// Elem törlése listából
+    /// @param dat - törlendõ adat refernciája
+    void torol(const T& dat);
+
+    /// Elem módosítása a listában
+    /// @param dat - módosítandó adat refernciája
+    /// @param mod - módosító adat refernciája
+    void modosit(const T& dat, const T& mod);
 
     class iterator;		    // elõdeklaráció
 
-    iterator begin() {      // létrehoz egy iterátort és az elejére állítja
+    /// Létrehoz egy iterátort és az elejére állítja
+    iterator begin() {      
         return(iterator(*this));
     }
 
-    iterator end() {     // létrehozza és az utolsó elem után állítja
+    /// Létrehozza és az utolsó elem után állítja
+    iterator end() {
         return(iterator());
     }
 
@@ -71,14 +91,21 @@ public:
         ListaElem* akt;	    // mutató az aktuális elemre
 
     public:
-        iterator() : akt(NULL) {};              // végére állítja az iterátort
+        /// Iterátor konstruktor
+        /// Végére állítja az iterátort
+        iterator() : akt(NULL) {};              
 
-        iterator(const Lista& l) : akt(l.elso) {// elejére állítja
+        /// Iterátor konstruktor
+        /// Elejére állítja az iterátort
+        /// @param l - lista refernciája
+        iterator(const Lista& l) : akt(l.elso) {
             if (akt->kov == NULL)
                 akt = NULL;                     // strázsa miatti trükk
         }
 
-        iterator& operator++() {        // növeli az iterátort (pre)
+        /// Növeli az iterátort (pre)
+        /// @return iterátor referencia
+        iterator& operator++() {        
             if (akt != NULL) {
                 akt = akt->kov;  	    // következõre
                 if (akt->kov == NULL)
@@ -87,45 +114,57 @@ public:
             return(*this);
         }
 
-        iterator operator++(int) {  // növeli az iterátort (post)
+        /// Növeli az iterátort (post)
+        /// @return iterátor referencia
+        iterator operator++(int) {  
             iterator tmp = *this;   // elõzõ érték
             operator++();	        // növel
             return(tmp);	        // elõzõvel kell visszatérni
         }
 
-        bool operator!=(const iterator& i) const { // összehasonlít
+        /// Összehasonlít
+        /// @param i - iterátor referencia
+        /// @return bool
+        bool operator!=(const iterator& i) const { 
             return(akt != i.akt);
         }
 
-        T& operator*() {	// indirekció
-            if (akt != NULL) return(akt->adat);
+        /// Indirekció
+        /// @return osztály referencia
+        T& operator*() {	
+            if (akt != NULL) return(akt->adat);     // visszatérés az adattal
             else throw std::out_of_range("Hiba");
         }
-        T* operator->() {	// indirekció
-            if (akt != NULL) return(&akt->adat);
+
+        /// Indirekció
+        /// @return osztály pointer
+        T* operator->() {
+            if (akt != NULL) return(&akt->adat);    // visszatérés az adattal
             else throw std::out_of_range("Hiba");
         }
 
     }; // iterator osztály vége
 
+    /// Destruktor
     ~Lista();
 };
 
-template <class T>          // tagfüggvénysablon
+template <class T>
 Lista<T>::~Lista() {
     ListaElem* p;			// futó pointer
     while ((p = elso) != NULL) {
-        elso = p->kov;
-        delete p;
+        elso = p->kov;      // pointer átállítása
+        delete p;           // törlés
     }
 }
 
-template <class T>                      // tagfüggvénysablon
+template <class T>
 void Lista<T>::beszur(const T& dat) {
-    ListaElem* i = elso;
+    ListaElem* i = elso;                    // futó pointer
+    // ismétlõdés keresése
     while (i != NULL && i->adat != dat)
-        i = i->kov;
-    if (i != NULL)              // ha nincs a feltételnek megfelelõ elem
+        i = i->kov;     // iterátor növelése
+    if (i != NULL)      // ha nincs a feltételnek megfelelõ elem
         throw "Mar van ilyen allat a listaban";
     else {
         ListaElem* p;			            // futó pointer
@@ -133,49 +172,44 @@ void Lista<T>::beszur(const T& dat) {
         ListaElem* uj = new ListaElem(*p);  //régit másol
         p->adat = dat;                      // adat beírása
         p->kov = uj;                        // pointer beállítása
-        std::cout << "Sikeres hozzaadas" << std::endl;
     } 
 }
 
 template <class T>
 void Lista<T>::torol(const T& dat) {
     // törlendõ elem keresése
-    ListaElem *elozo = NULL;
-    ListaElem *i = elso;
+    ListaElem *elozo = NULL;    // lemaradó pointer
+    ListaElem *i = elso;        // futó pointer
     while (i != NULL && i->adat != dat)
     {
-        elozo = i;
-        i = i->kov;
+        elozo = i;      //lemaradó pointer növelése
+        i = i->kov;     // futó pointer növelése
     }
 
     //megatalált elem törlése
     if (i == NULL)              // ha nincs a feltételnek megfelelõ elem
-        throw "Nincs ilyen elem";
-        //throw "Nincs ilyen elem";
+        throw "Nincs ilyen elem";             
     else if (elozo == NULL) {   // ha az elsõ elemet kell törölni
-        ListaElem *uj = i->kov;
-        delete(i);
-        elso = uj;
-        std::cout << "Sikeres torles" << std::endl;
+        ListaElem *uj = i->kov; // pointer átállítása
+        delete(i);              // törlendõ törlése
+        elso = uj;              // lista eleje pointer beállítása
     }
     else {                      //ha lista belsõ vagy utolsó elemét kell törölni
-        elozo->kov = i->kov;
-        delete(i);
-        std::cout << "Sikeres torles" << std::endl;
+        elozo->kov = i->kov;    // pointer átállítása
+        delete(i);              // törlendõ törlése
     }
 }
 
-template <class T>                      // tagfüggvénysablon
+template <class T>
 void Lista<T>::modosit(const T& dat, const T& mod) {
     //módosítandó elem keresése
-    ListaElem * i = elso;
+    ListaElem * i = elso;       // futó pointer
     while (i != NULL && i->adat != dat)
-        i = i->kov;
+        i = i->kov;             // pointer növelése
     if (i == NULL)              // ha nincs a feltételnek megfelelõ elem
         throw "Nincs ilyen elem";
     else {
-        i->adat = mod;
-        std::cout << "Sikeres modositas" << std::endl;
+        i->adat = mod;          // adat módosítása
     }
 }
 

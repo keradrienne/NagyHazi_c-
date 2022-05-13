@@ -100,18 +100,21 @@ public:
 };
 
 /// String operator+
+/// @param c - karakter
+/// @param s - String referencia
+/// @return új String, ami tartalmazza a két stringet egymás után
 String operator+(char c, String& s);
 
 /// kiír az ostream-re (printString)
 /// @param os - ostream típusú objektum
 /// @param s0 - String, amit kiírunk
-/// @return os
+/// @return ostream típusú objektum
 std::ostream& operator<<(std::ostream& os, const String& s);
 
 /// Beolvas az istream-ről egy szót egy string-be.
 /// @param is - istream típusú objektum
 /// @param s0 - String, amibe beolvas
-/// @return is
+/// @return istream típusú objektum
 std::istream& operator>>(std::istream& is, String& s0);
 
 #endif // STRING_H

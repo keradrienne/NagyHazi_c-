@@ -68,5 +68,8 @@
     <ClInclude Include="macska.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="gtest_lite.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

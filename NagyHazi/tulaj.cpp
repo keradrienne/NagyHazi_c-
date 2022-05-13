@@ -17,10 +17,6 @@ Tulaj::Tulaj(const char* nev, const char* cim, const char* tel) {
 	} else throw "Hibas bemenet";
 }
 
- /// Globális inserter
- /// @param os - output stream referencia
- /// @param t - Tulaj referencia
- /// @return output stream referencia
 std::ostream& operator<<(std::ostream& os, const Tulaj& t) {
-	return os <<"Nev: " << t.getNev() << "\n\tCim: " << t.getCim() << "\n\tTelefonszam: " << t.getTel();
+	return os <<"\tNev: " << t.getNev() << "\n\t\tCim: " << t.getCim() << "\n\t\tTelefonszam: " << t.getTel();
 }

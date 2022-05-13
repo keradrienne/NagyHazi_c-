@@ -86,7 +86,7 @@
     <ClCompile>
       <WarningLevel>Level3</WarningLevel>
       <SDLCheck>true</SDLCheck>
-      <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
     </ClCompile>
     <Link>
@@ -151,6 +151,7 @@
   <ItemGroup>
     <ClInclude Include="allat.h" />
     <ClInclude Include="datum.h" />
+    <ClInclude Include="gtest_lite.h" />
     <ClInclude Include="kutya.h" />
     <ClInclude Include="list.hpp" />
     <ClInclude Include="macska.h" />

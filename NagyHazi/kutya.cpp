@@ -9,7 +9,6 @@
 #include "memtrace.h"
 #include"kutya.h"
 
-/// Paraméteres konstruktor
 Kutya::Kutya(const char* faj, const char* nev, const Datum& szul,
 	const Tulaj& gazdi, const char* chip, const char* bunda, bool nem) :Allat(faj, nev, szul), gazdi(gazdi) {
 	if (chip != "" && bunda != "") {
@@ -19,26 +18,22 @@ Kutya::Kutya(const char* faj, const char* nev, const Datum& szul,
 	} else throw "Hibas bemenet";
 }
 
-/// operátor==
 bool Kutya::operator==(const Kutya& k) const {
 	return faj == k.faj && nev == k.nev && szul == k.szul &&
 		gazdi == k.gazdi && chip == k.chip && bunda == k.bunda && nem == k.nem;
 }
 
-/// operátor!=
 bool Kutya::operator!=(const Kutya& k) const {
 	return faj != k.faj || nev != k.nev || szul != k.szul || 
 		gazdi != k.gazdi || chip != k.chip || bunda != k.bunda || nem != k.nem;
 }
 
-/// Globális inserter
 std::ostream& operator<<(std::ostream& os, Kutya& k) {
-	return os << "\nKutya adatai:\n\tFaj: " << k.getFaj() << "\n\tNev: " << k.getNev() << "\n\tSzuletesi ido: " << k.getSzul() <<
-		"\n\tChip szam: " << k.getChip() << "\n\tBunda: " << k.getBunda() << "\n\tNem: " << (k.getNem() ? "Nosteny" : "Him") <<
-		"\nTulaj adatai:\n\t" << k.getTulaj();
+	return os << "\n\tKutya adatai:\n\t\tFaj: " << k.getFaj() << "\n\t\tNev: " << k.getNev() << "\n\t\tSzuletesi ido: " << k.getSzul() <<
+		"\n\t\tChip szam: " << k.getChip() << "\n\t\tBunda: " << k.getBunda() << "\n\t\tNem: " << (k.getNem() ? "Nosteny" : "Him") <<
+		"\n\tTulaj adatai:\n\t" << k.getTulaj();
 }
 
-/// Globális inserter
 std::ofstream& operator<<(std::ofstream& of, Kutya& k) {
 	of << k.getFaj() << ";" << k.getNev() << ";" << k.getSzul().getEv() << ";" << k.getSzul().getHo() << ";" << k.getSzul().getNap() 
 		<< ";" << k.getChip() << ";" << k.getBunda() << ";" << k.getNem() << ";" << k.getTulaj().getNev() << ";" << k.getTulaj().getCim() 

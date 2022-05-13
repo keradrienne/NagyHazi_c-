@@ -1,1 +1,2 @@
 Kaukazusi papagaj;Molly;2022;5;13;feher, kek szinu teljes tollazat;1;Szabo Korte;3366 Falva, Lanc utca 32.;06 12 345 678
+Hullamos papagaj;Jack;2020;6;8;feher, kek szinu teljes tollazat;1;Lista Pista;9999 Almafalva Tukor koz 33.;06 12 345 678
