@@ -12,14 +12,6 @@
 
 #include "list.hpp"
 
-using namespace std;
-
-/// <summary>
-/// hiányzik:
-///     beolvasás
-/// </summary>
-/// <returns></returns>
-
 /// TESZT 1.
 void test_1() {
     TEST(test_1, Letehozas) {
