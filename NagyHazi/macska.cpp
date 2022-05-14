@@ -11,7 +11,7 @@
 
 Macska::Macska(const char* faj, const char* nev, const Datum& szul,
 	const Tulaj& gazdi, const char* chip, const char* bunda, bool nem) :Allat(faj, nev, szul), gazdi(gazdi) {
-	if (chip != "" && bunda != "") {
+	if (String(chip) != String() && String(bunda) != String()) {
 		this->chip = chip;
 		this->bunda = bunda;
 		this->nem = nem;

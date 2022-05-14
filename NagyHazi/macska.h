@@ -15,10 +15,10 @@
 #include "tulaj.h"
 class Macska : public Allat{
 private:
-	Tulaj gazdi;	///< tulajdonos
-	String chip;	///< chipszám
-	String bunda;	///< bunda jellege, színe
-	bool nem;		///< állat neme
+	Tulaj gazdi;
+	String chip;
+	String bunda;
+	bool nem;
 public:
 	///Default konstruktor
 	Macska() :nem(false) {}
@@ -48,18 +48,42 @@ public:
 	/// @return - gazdi
 	Tulaj getTulaj() { return gazdi; }
 
+	/// Tulaj beállítása
+	/// @param t - Tulaj referencia
+	void setTulaj(Tulaj& t) { this->gazdi = t; }
+
 	/// Chipszám lekérdezése
 	/// @return - chip
 	String getChip() { return chip; }
+
+	/// Chipszám beállítása
+	/// @param p - karaktersorozat
+	void setChip(const char* p) {
+		if (String(p) != String())
+			this->chip = p;
+		else throw "Rossz bemenet";
+	}
 
 	/// Bunda lekérdezése
 	/// @return - bunda
 	String getBunda() { return bunda; }
 
+	/// Bundázat beállítása
+	/// @param p - karaktersorozat
+	void setBunda(const char* p) {
+		if (String(p) != String())
+			this->bunda = p;
+		else throw "Rossz bemenet";
+	}
+
 	/// Nem lekérdezése
 	/// True - nõstény, False - hím
 	/// @return - nem
 	bool getNem() { return nem; }
+
+	/// Nem beállítása
+	/// @param b - true/false
+	void setNem(bool b) { this->nem = b; }
 
 	/// Destruktor
 	~Macska() {}

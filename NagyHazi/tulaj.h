@@ -11,9 +11,9 @@
 
 class Tulaj {
 private:
-	String tNev;		///< név
-	String cim;		///< cím
-	String tel;		///< telefonszám
+	String tNev;
+	String cim;
+	String tel;
 public:
 	///Default konstruktor
 	Tulaj() {}
@@ -42,13 +42,37 @@ public:
 	/// @return - név
 	String getNev() const { return tNev; }
 
+	/// Nev beállítása
+	/// @param p - karaktersorozat
+	void settNev(const char* p) {
+		if (String(p) != String())
+			this->tNev = p;
+		else throw "Rossz bemenet";
+	}
+
 	/// Cím lekérdezése
 	/// @return - cím
 	String getCim() const { return cim; }
 
+	/// Cim beállítása
+	/// @param p - karaktersorozat
+	void setCim(const char* p) {
+		if (String(p) != String())
+			this->cim = p;
+		else throw "Rossz bemenet";
+	}
+
 	/// Telefonszám lekérdezése
 	/// @return - telefonszám
 	String getTel() const { return tel; }
+
+	/// Telefonszám beállítása
+	/// @param p - karaktersorozat
+	void setTel(const char* p) {
+		if (String(p) != String())
+			this->tel = p;
+		else throw "Rossz bemenet";
+	}
 
 	/// Destruktor
 	~Tulaj() {}

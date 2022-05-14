@@ -16,9 +16,10 @@
 
 class Papagaj : public Allat{
 private:
-	Tulaj gazdi;		///< tulajdonos
-	String tollazat;	///< tollazat jellege, színe
-	bool nem;			///< állat neme
+	Tulaj gazdi;
+	String chip;
+	String bunda;
+	bool nem;
 public:
 	///Default konstruktor
 	Papagaj() :nem(false) {}
@@ -28,10 +29,11 @@ public:
 	/// @param nev - név megadása
 	/// @param szul - születési év megadása
 	/// @param gazdi - tulaj megadása
+	/// @param chip - chipszám megadása
 	/// @param tollazat - tollazat jellege, színe megadása
 	/// @param nem - nem megadása
 	Papagaj(const char* faj, const char* nev, const Datum& szul,
-		const Tulaj& gazdi, const char* tollazat, bool nem);
+		const Tulaj& gazdi, const char* chip, const char* tollazat, bool nem);
 
 	/// Két papagáj egyezõségét vizsgálja
 	/// @param p - jobb oldali operandus
@@ -47,14 +49,42 @@ public:
 	/// @return - gazdi
 	Tulaj getTulaj() { return gazdi; }
 
+	/// Tulaj beállítása
+	/// @param t - Tulaj referencia
+	void setTulaj(Tulaj& t) { this->gazdi = t; }
+
+	/// Chipszám lekérdezése
+	/// @return - chip
+	String getChip() { return chip; }
+
+	/// Chipszám beállítása
+	/// @param p - karaktersorozat
+	void setChip(const char* p) { 
+		if (String(p) != String())
+			this->chip = p;
+		else throw "Rossz bemenet";
+	}
+
 	/// Tollazat lekérdezése
 	/// @return - bunda
-	String getTollazat() { return tollazat; }
+	String getBunda() { return bunda; }
+
+	/// Tollazat beállítása
+	/// @param p - karaktersorozat
+	void setBunda(const char* p) {
+		if (String(p) != String())
+			this->bunda = p;
+		else throw "Rossz bemenet";
+	}
 
 	/// Nem lekérdezése
 	/// True - nõstény, False - hím
 	/// @return - nem
 	bool getNem() { return nem; }
+
+	/// Nem beállítása
+	/// @param b - true/false
+	void setNem(bool b) { this->nem = b; }
 
 	/// Destruktor
 	~Papagaj() {}

@@ -10,7 +10,7 @@
 #include "tulaj.h"
 
 Tulaj::Tulaj(const char* nev, const char* cim, const char* tel) {
-	if (nev != "" && cim != "" && tel != "") {
+	if (String(nev) != String() && String(cim) != String() && String(tel) != String()) {
 		this->tNev = nev;
 		this->cim = cim;
 		this->tel = tel;

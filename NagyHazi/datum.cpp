@@ -39,6 +39,15 @@ Datum::Datum(int ev, int ho, int nap) {
     }
 }
 
+void Datum::setEv(int ev) {
+    time_t tim;
+    tim = time(NULL);       // lekérdezzük a jelenlegi időt
+    struct tm* tp = localtime(&tim);  // átalakítjuk
+    int mev = tp->tm_year + 1900;
+    if (ev < 2000 || ev > mev) throw "Rossz datum";
+    else this->ev = ev;
+}
+
 std::ostream& operator<<(std::ostream& os, const Datum& d) {
     return os << setw(4) << d.getEv() << "-"
        << setw(2) << setfill('0') << d.getHo() << "-"

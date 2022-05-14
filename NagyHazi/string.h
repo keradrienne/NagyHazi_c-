@@ -15,8 +15,8 @@
   * A hosszba nem számít bele a lezáró nulla.
   */
 class String {
-    char *pData;        ///< pointer az adatra
-    size_t len;         ///< hossz lezáró nulla nélkül
+    char *pData;
+    size_t len;
 public:
     /// Paraméter nélküli konstruktor:
     String() :pData(0), len(0) {

@@ -14,9 +14,9 @@
 
 
 class Datum {
-    int ev;     ///< év
-    int ho;     ///< hónap
-    int nap;    ///< nap
+    int ev;
+    int ho;
+    int nap;
   public:
     /// Paraméter nélkül hívható konstruktor.
     /// Mai napot állítja be
@@ -32,13 +32,31 @@ class Datum {
     /// @return ev
     int getEv() const { return ev;}
 
+    /// Év beállítása
+    /// @param - ev
+    void setEv(int ev);
+
     /// Hónap lekérdezése
     /// @return honap
     int getHo() const { return ho;}
 
+    /// Hónap beállítása
+    /// @param - honap
+    void setHo(int ho) {
+        if(ho > 12 || ho < 1) throw "Rossz datum";
+        else this->ho = ho;
+    }
+
     /// Nap lekérdezése
     /// @return nap
     int getNap() const { return nap;}
+
+    /// Nap beállítása
+    /// @param - nap
+    void setNap(int nap) {
+        if (nap > 31 || nap < 1) throw "Rossz datum";
+        this->nap = nap;
+    }
 
     /// Két dátum egyezőségét vizsgálja
     /// @param d - jobb oldali operandus

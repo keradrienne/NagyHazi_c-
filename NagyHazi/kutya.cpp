@@ -11,7 +11,7 @@
 
 Kutya::Kutya(const char* faj, const char* nev, const Datum& szul,
 	const Tulaj& gazdi, const char* chip, const char* bunda, bool nem) :Allat(faj, nev, szul), gazdi(gazdi) {
-	if (chip != "" && bunda != "") {
+	if (String(chip) != String() && String(bunda) != String()) {
 		this->chip = chip;
 		this->bunda = bunda;
 		this->nem = nem;
@@ -35,7 +35,7 @@ std::ostream& operator<<(std::ostream& os, Kutya& k) {
 }
 
 std::ofstream& operator<<(std::ofstream& of, Kutya& k) {
-	of << k.getFaj() << ";" << k.getNev() << ";" << k.getSzul().getEv() << ";" << k.getSzul().getHo() << ";" << k.getSzul().getNap() 
+	of << k.getFaj() << ";" << k.getNev() << ";" << k.getSzul().getEv() << ";" << k.getSzul().getHo() << ";" << k.getSzul().getNap()
 		<< ";" << k.getChip() << ";" << k.getBunda() << ";" << k.getNem() << ";" << k.getTulaj().getNev() << ";" << k.getTulaj().getCim() 
 		<< ";" << k.getTulaj().getTel() << std::endl;
 	return of;

@@ -92,7 +92,7 @@ bool String::operator==(const String& s) const {
 }
 
 bool String::operator==(const char* s) const {
-	int db = 0;
+	size_t db = 0;
 	while (s[db] != '\0')
 		db++;
 
@@ -114,7 +114,7 @@ bool String::operator!=(const String& s) const {
 }
 
 bool String::operator!=(const char* s) const {
-	int db = 0;
+	size_t db = 0;
 	while (s[db] != '\0')
 		db++;
 
